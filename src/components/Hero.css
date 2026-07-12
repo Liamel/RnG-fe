@@ -1,0 +1,118 @@
+.hero {
+  position: relative;
+  background: linear-gradient(180deg, #08080a 0%, #0e0d10 55%, #1c0a0c 100%);
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  padding: clamp(44px, 7vw, 64px) var(--pad-x) clamp(40px, 6vw, 56px);
+}
+
+.hero-eyebrow {
+  font-size: 20px;
+  color: var(--red-soft);
+  letter-spacing: 2px;
+  margin: 0 0 18px;
+}
+
+.hero-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(24px, 5.5vw, 42px);
+  line-height: 1.35;
+  color: var(--bone);
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  margin: 0;
+}
+
+.hero-red {
+  color: var(--red-bright);
+}
+
+.hero-sub {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--gray);
+  margin: 26px 0 32px;
+  max-width: 440px;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero-btn {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  padding: 14px 22px;
+  border: 2px solid;
+  white-space: nowrap;
+}
+
+.hero-btn-red {
+  background: var(--red);
+  color: var(--bone);
+  border-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
+    rgba(255, 255, 255, 0.35);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.hero-btn-red:hover {
+  background: #d1202a;
+  color: var(--bone);
+}
+
+.hero-btn-dark {
+  background: var(--bg-panel);
+  color: var(--bone);
+  border-color: rgba(255, 255, 255, 0.28) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
+    rgba(255, 255, 255, 0.28);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.hero-btn-dark:hover {
+  background: #1a191d;
+  color: var(--bone);
+}
+
+.hero-capture {
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.28) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
+    rgba(255, 255, 255, 0.28);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-capture-label {
+  font-size: 18px;
+  color: var(--gray);
+}
+
+.hero-capture-live {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--green);
+}
+
+@media (max-width: 820px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-capture {
+    height: 240px;
+  }
+}

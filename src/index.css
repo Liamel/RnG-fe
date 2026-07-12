@@ -1,0 +1,115 @@
+:root {
+  --bg: #08080a;
+  --bg-panel: rgba(16, 15, 18, 0.92);
+  --bg-ticker: #0b0b0d;
+  --border-dark: #17171a;
+  --red: #c1121f;
+  --red-bright: #ff4038;
+  --red-soft: #ff6b4a;
+  --bone: #f2efe9;
+  --ink: #140809;
+  --ink-soft: #4a4550;
+  --gray: #97959e;
+  --gray-dim: #5b5960;
+  --green: #8fbd5a;
+
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-term: 'VT323', monospace;
+
+  --pad-x: clamp(20px, 5vw, 40px);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--bone);
+  font-family: var(--font-term);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* max-width content wrapper inside full-bleed sections */
+.wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+/* arcade bevel panel: raised 2px border + hard offset shadow */
+.bevel {
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.28) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
+    rgba(255, 255, 255, 0.28);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.bevel-strong {
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
+    rgba(255, 255, 255, 0.35);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* CRT scanline overlay */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* diagonal-stripe placeholder art */
+.stripes-dark {
+  background: repeating-linear-gradient(
+    135deg,
+    #131316,
+    #131316 10px,
+    #101013 10px,
+    #101013 20px
+  );
+}
+
+.stripes-panel {
+  background: repeating-linear-gradient(
+    135deg,
+    #17171a,
+    #17171a 10px,
+    #131316 10px,
+    #131316 20px
+  );
+}
+
+.stripes-red {
+  background: repeating-linear-gradient(
+    135deg,
+    #1c0a0c,
+    #1c0a0c 10px,
+    #17090b 10px,
+    #17090b 20px
+  );
+}
