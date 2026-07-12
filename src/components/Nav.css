@@ -93,6 +93,20 @@
   color: var(--ink);
 }
 
+.theme-toggle {
+  border: 1px solid var(--gray-dim);
+  background: transparent;
+  color: var(--bone);
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  border-color: var(--bone);
+}
+
 .nav-burger {
   display: none;
   flex-direction: column;
@@ -138,6 +152,14 @@
 @media (max-width: 820px) {
   .nav-links {
     display: none;
+  }
+  .theme-toggle {
+    display: none;
+  }
+  .nav-mobile .theme-toggle {
+    display: block;
+    align-self: flex-start;
+    margin-top: 10px;
   }
   .nav-burger {
     display: flex;

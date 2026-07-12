@@ -19,7 +19,11 @@ function DieLogo() {
   )
 }
 
-function Nav() {
+type NavProps = {
+  onThemeToggle: () => void
+}
+
+function Nav({ onThemeToggle }: NavProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -41,6 +45,9 @@ function Nav() {
           <a className="nav-cta bevel-strong" href="#contact">
             PARTNER WITH US
           </a>
+          <button type="button" className="theme-toggle" onClick={onThemeToggle}>
+            LIGHT THEME
+          </button>
         </nav>
 
         <button
@@ -70,6 +77,9 @@ function Nav() {
           >
             PARTNER WITH US
           </a>
+          <button type="button" className="theme-toggle" onClick={onThemeToggle}>
+            LIGHT THEME
+          </button>
         </nav>
       )}
     </header>

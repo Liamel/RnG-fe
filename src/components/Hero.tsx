@@ -5,7 +5,7 @@ function Hero() {
     <section className="hero scanlines" id="top">
       <div className="hero-inner wrap">
         <div className="hero-copy">
-          <p className="hero-eyebrow">EST. 2026 — REAL-TIME MULTIPLAYER GAME STUDIO</p>
+          <p className="hero-eyebrow">REAL-TIME MULTIPLAYER GAME STUDIO</p>
           <h1 className="hero-title">
             RANDOM
             <br />
