@@ -2,12 +2,12 @@ import './GamesGrid.css'
 import AccordionGallery, { type AccordionGalleryItem } from './AccordionGallery'
 
 const games: AccordionGalleryItem[] = [
-  { image: '/games/arknoid.svg', embedUrl: 'https://arknoid-fe.vercel.app/', label: 'ARKNOID', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Red arcade tunnel artwork for Arknoid' },
-  { image: '/games/spidey.svg', embedUrl: 'https://arknoid-fe-spidey.vercel.app/', label: 'ARKNOID: SPIDEY', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Red and blue web artwork for Arknoid Spidey' },
-  { image: '/games/vault-13.svg', label: 'VAULT 13', eyebrow: 'MOCK TITLE · INSTANT WIN', alt: 'Glowing vault concept artwork' },
-  { image: '/games/blackjack-zero.svg', label: 'BLACKJACK ZERO', eyebrow: 'MOCK TITLE · TABLE', alt: 'Futuristic playing card concept artwork' },
-  { image: '/games/orbit.svg', label: 'ORBIT', eyebrow: 'MOCK TITLE · CRASH', alt: 'Planet and spacecraft concept artwork' },
-  { image: '/games/lucky-byte.svg', label: 'LUCKY BYTE', eyebrow: 'MOCK TITLE · SLOTS', alt: 'Pixel fruit machine concept artwork' },
+  { image: '/games/arknoid-key-art.jpg', embedUrl: 'https://arknoid-fe.vercel.app/', label: 'ARKNOID', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Colorful brick-breaker arcade key art for Arknoid' },
+  { image: '/games/spidey-key-art.jpg', embedUrl: 'https://arknoid-fe-spidey.vercel.app/', label: 'ARKNOID: SPIDEY', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Crimson web-swing arcade key art for Arknoid Spidey' },
+  { image: '/games/vault-13-key-art.jpg', label: 'VAULT 13', eyebrow: 'MOCK TITLE · INSTANT WIN', alt: 'Futuristic golden vault key art' },
+  { image: '/games/blackjack-zero-key-art.jpg', label: 'BLACKJACK ZERO', eyebrow: 'MOCK TITLE · TABLE', alt: 'Futuristic playing-card key art' },
+  { image: '/games/orbit-key-art.jpg', label: 'ORBIT', eyebrow: 'MOCK TITLE · CRASH', alt: 'Neon spacecraft orbiting a planet' },
+  { image: '/games/lucky-byte-key-art.jpg', label: 'LUCKY BYTE', eyebrow: 'MOCK TITLE · SLOTS', alt: 'Colorful voxel fruit arcade key art' },
 ]
 
 function GamesGrid() {
