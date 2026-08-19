@@ -1,39 +1,13 @@
 import './GamesGrid.css'
+import AccordionGallery, { type AccordionGalleryItem } from './AccordionGallery'
 
-type Game = {
-  title: string
-  blurb: string
-  status: 'live' | 'soon'
-  statusLabel: string
-  art: 'red' | 'dark'
-  artLabel: string
-}
-
-const games: Game[] = [
-  {
-    title: 'ARKNOID',
-    blurb: 'Multiplayer crash · RTP 96% · Max win 10,000x',
-    status: 'live',
-    statusLabel: 'LIVE',
-    art: 'red',
-    artLabel: '[ arknoid key art ]',
-  },
-  {
-    title: '???????',
-    blurb: 'In development · Q1 2027',
-    status: 'soon',
-    statusLabel: 'SOON',
-    art: 'dark',
-    artLabel: '[ next title key art ]',
-  },
-  {
-    title: '???????',
-    blurb: 'In development · 2027',
-    status: 'soon',
-    statusLabel: 'SOON',
-    art: 'dark',
-    artLabel: '[ next title key art ]',
-  },
+const games: AccordionGalleryItem[] = [
+  { image: '/games/arknoid.svg', embedUrl: 'https://arknoid-fe.vercel.app/', label: 'ARKNOID', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Red arcade tunnel artwork for Arknoid' },
+  { image: '/games/spidey.svg', embedUrl: 'https://arknoid-fe-spidey.vercel.app/', label: 'ARKNOID: SPIDEY', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Red and blue web artwork for Arknoid Spidey' },
+  { image: '/games/vault-13.svg', label: 'VAULT 13', eyebrow: 'MOCK TITLE · INSTANT WIN', alt: 'Glowing vault concept artwork' },
+  { image: '/games/blackjack-zero.svg', label: 'BLACKJACK ZERO', eyebrow: 'MOCK TITLE · TABLE', alt: 'Futuristic playing card concept artwork' },
+  { image: '/games/orbit.svg', label: 'ORBIT', eyebrow: 'MOCK TITLE · CRASH', alt: 'Planet and spacecraft concept artwork' },
+  { image: '/games/lucky-byte.svg', label: 'LUCKY BYTE', eyebrow: 'MOCK TITLE · SLOTS', alt: 'Pixel fruit machine concept artwork' },
 ]
 
 function GamesGrid() {
@@ -46,24 +20,9 @@ function GamesGrid() {
             ALL TITLES →
           </a>
         </div>
-        <div className="games-grid">
-          {games.map((game, i) => (
-            <article className={`game-card bevel${game.status === 'soon' ? ' game-card-soon' : ''}`} key={i}>
-              <div className={`game-art ${game.art === 'red' ? 'stripes-red' : 'stripes-dark'}`}>
-                {game.artLabel}
-              </div>
-              <div className="game-body">
-                <div className="game-row">
-                  <h3 className="game-name">{game.title}</h3>
-                  <span className={`game-badge game-badge-${game.status}`}>
-                    {game.statusLabel}
-                  </span>
-                </div>
-                <p className="game-blurb">{game.blurb}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <p className="games-intro">HOVER OR TAP A TITLE TO EXPLORE THE LINEUP.</p>
+        <AccordionGallery items={games} defaultIndex={0} expandRatio={0.5} trigger="hover" height={500} gap={12} />
+        <p className="games-note">DEMO LINEUP · PLACEHOLDER ART AND TITLES</p>
       </div>
     </section>
   )
