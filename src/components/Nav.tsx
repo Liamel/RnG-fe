@@ -2,8 +2,8 @@ import { useState } from 'react'
 import './Nav.css'
 
 const links = [
-  { label: 'GAMES', href: '#games' },
-  { label: 'TECH', href: '#tech' },
+  { label: 'CRASH', href: '#crash' },
+  { label: 'SLOTS', href: '#slots' },
   { label: 'ABOUT', href: '#about' },
 ]
 
@@ -19,11 +19,7 @@ function DieLogo() {
   )
 }
 
-type NavProps = {
-  onThemeToggle: () => void
-}
-
-function Nav({ onThemeToggle }: NavProps) {
+function Nav() {
   const [open, setOpen] = useState(false)
 
   return (
@@ -45,9 +41,6 @@ function Nav({ onThemeToggle }: NavProps) {
           <a className="nav-cta bevel-strong" href="#contact">
             PARTNER WITH US
           </a>
-          <button type="button" className="theme-toggle" onClick={onThemeToggle}>
-            LIGHT THEME
-          </button>
         </nav>
 
         <button
@@ -77,9 +70,6 @@ function Nav({ onThemeToggle }: NavProps) {
           >
             PARTNER WITH US
           </a>
-          <button type="button" className="theme-toggle" onClick={onThemeToggle}>
-            LIGHT THEME
-          </button>
         </nav>
       )}
     </header>

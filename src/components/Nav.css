@@ -1,7 +1,7 @@
 .nav {
-  background: var(--bg);
-  border-bottom: 2px solid var(--border-dark);
-  position: sticky;
+  background: linear-gradient(#08080ae8,transparent);
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 10;
 }
@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px var(--pad-x);
+  padding: 22px var(--pad-x);
 }
 
 .nav-brand {
@@ -128,7 +128,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 8px var(--pad-x) 20px;
-  border-top: 2px solid var(--border-dark);
+  border-top: 1px solid #ffffff22;
   background: var(--bg);
 }
 

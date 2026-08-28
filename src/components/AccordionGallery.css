@@ -21,7 +21,7 @@
   opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 160ms ease;
 }
 .ag-panel__media--live iframe { opacity: 1; visibility: visible; pointer-events: auto; }
-.ag-panel__media img { object-fit: cover; user-select: none; }
+.ag-panel__media img { object-fit: cover; user-select: none; opacity: 1; visibility: visible; }
 .ag-panel__media--embed {
   inset: 0;
   width: 100%;
