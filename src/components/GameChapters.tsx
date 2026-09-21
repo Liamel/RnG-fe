@@ -4,8 +4,8 @@ import FoldText from './FoldText'
 import './GameChapters.css'
 
 const crashGames: AccordionGalleryItem[] = [
-  { image:'/games/orbit-key-art.jpg', embedUrl:'https://arknoid-fe.vercel.app/', label:'ARKNOID', eyebrow:'HOVER TO LOAD · LIVE GAME', alt:'Arknoid live game cover' },
-  { image:'/games/vault-13-key-art.jpg', embedUrl:'https://arknoid-fe-spidey.vercel.app/', label:'SPIDEY', eyebrow:'HOVER TO LOAD · LIVE GAME', alt:'Spidey live game cover' },
+  { image:'/games/orbit-key-art.jpg', link:'https://arknoid-fe.vercel.app/', label:'ARKNOID', eyebrow:'PLAY DEMO · LIVE GAME', alt:'Arknoid live game cover' },
+  { image:'/games/vault-13-key-art.jpg', link:'https://arknoid-fe-spidey.vercel.app/', label:'SPIDEY', eyebrow:'PLAY DEMO · LIVE GAME', alt:'Spidey live game cover' },
   { image:'/games/arknoid-key-art.jpg', label:'ARKNOID', eyebrow:'CRASH · LIVE', alt:'Colorful arcade world' },
   { image:'/games/spidey-key-art.jpg', label:'REDLINE', eyebrow:'CRASH · LIVE', alt:'Red neon city action artwork' },
   { image:'/games/blackjack-zero-key-art.jpg', label:'ZERO G', eyebrow:'CRASH · LIVE', alt:'Futuristic zero gravity card artwork' },
@@ -13,12 +13,12 @@ const crashGames: AccordionGalleryItem[] = [
 ]
 
 const slotGames: AccordionGalleryItem[] = [
+  { image:'/games/jade-garden-key-art.jpg', link:'https://jade-garden-alpha.vercel.app/', label:'JADE GARDEN', eyebrow:'PLAY DEMO · LIVE GAME', alt:'Jade Garden 5×3 orchard slot live game cover' },
+  { image:'/games/pista-spin-key-art.jpg', link:'https://pistaspin-alpha.vercel.app/', label:'PISTA SPIN', eyebrow:'PLAY DEMO · LIVE GAME', alt:'Pista Spin fiesta market slot live game cover' },
+  { image:'/games/aniwilder-key-art.jpg', link:'https://aniwilder-alpha.vercel.app/', label:'ANIWILDER', eyebrow:'PLAY DEMO · LIVE GAME', alt:'Aniwilder lock and spin sanctuary slot live game cover' },
   { image:'/games/lucky-byte-key-art.jpg', label:'LUCKY BYTE', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Lucky Byte slot game concept' },
   { image:'/games/vault-13-key-art.jpg', label:'VAULT SPIN', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Vault Spin slot game concept' },
-  { image:'/games/spidey-key-art.jpg', label:'WEB OF WINS', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Web of Wins slot game concept' },
   { image:'/games/orbit-key-art.jpg', label:'COSMIC REELS', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Cosmic Reels slot game concept' },
-  { image:'/games/blackjack-zero-key-art.jpg', label:'NEON FORTUNE', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Neon Fortune slot game concept' },
-  { image:'/games/arknoid-key-art.jpg', label:'BLOCK PARTY', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Block Party slot game concept' },
 ]
 
 function Chapter({ id, index, kicker, title, copy, items, accent, tone }:{ id:string; index:string; kicker:string; title:string; copy:string; items:AccordionGalleryItem[]; accent:string; tone:'red'|'violet' }) {
@@ -60,7 +60,7 @@ export default function GameChapters(){
   </aside>
   <section className="opening" id="top"><div className="opening-grid" aria-hidden="true"/><p className="opening-kicker">INDEPENDENT GAME STUDIO · BERLIN / WORLDWIDE</p><FoldText text={'WE MAKE\nCHANCE FEEL\nELECTRIC.'} splitBy="line" trigger="mount" fontSize="clamp(2.75rem, 7.4vw, 7.5rem)" /><a href="#crash" className="opening-scroll">SCROLL TO EXPLORE <span>↓</span></a></section>
   <Chapter id="crash" index="01" kicker="CATEGORY ONE" title="CRASH GAMES" copy="Fast rounds. Clean tension. Every second is a decision. Explore our high-energy crash portfolio." items={crashGames} accent="#ff4b35" tone="red" />
-  <Chapter id="slots" index="02" kicker="CATEGORY TWO" title="SLOT GAMES" copy="Six new worlds are spinning into shape. Meet the slot concepts currently in our development lab." items={slotGames} accent="#b89cff" tone="violet" />
+  <Chapter id="slots" index="02" kicker="CATEGORY TWO" title="SLOT GAMES" copy="Three reel worlds have live demos ready to play — Jade Garden, Pista Spin and Aniwilder. Three more are spinning into shape in the lab." items={slotGames} accent="#b89cff" tone="violet" />
   <section className="closing" id="about"><p>BUILD THE NEXT HIT WITH US.</p><FoldText text="LET'S PLAY." splitBy="word" fontSize="clamp(3.2rem, 8vw, 7.5rem)" color="#08080a"/><a href="mailto:hello@rngstudios.com">START A CONVERSATION ↗</a></section>
   </>
 }

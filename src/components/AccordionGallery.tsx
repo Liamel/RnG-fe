@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react'
 import { gsap } from 'gsap'
 import './AccordionGallery.css'
 
 export type AccordionGalleryItem = {
   image?: string
-  embedUrl?: string
   label?: string
   link?: string
   alt?: string
@@ -41,7 +40,7 @@ function AccordionGallery({
   className = '',
 }: AccordionGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null)
-  const panelRefs = useRef<Array<HTMLAnchorElement | null>>([])
+  const panelRefs = useRef<Array<HTMLDivElement | null>>([])
   const mediaRefs = useRef<Array<HTMLSpanElement | null>>([])
   const barRefs = useRef<Array<HTMLSpanElement | null>>([])
   const textRefs = useRef<Array<HTMLSpanElement | null>>([])
@@ -50,7 +49,6 @@ function AccordionGallery({
   const mediaSizeRef = useRef(320)
   const count = items.length
   const [active, setActive] = useState(Math.min(Math.max(defaultIndex, 0), count - 1))
-  const [engagedEmbed, setEngagedEmbed] = useState<number | null>(null)
   const prefersReduced = typeof window !== 'undefined' && window.matchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false
 
@@ -69,14 +67,13 @@ function AccordionGallery({
       const media = mediaRefs.current[index]
       const bar = barRefs.current[index]
       const text = textRefs.current[index]
-      const isEmbed = Boolean(items[index]?.embedUrl)
       timeline.to(panel, { flexGrow: isActive ? grow : 1, rotateY: rotation, duration: seconds, ease }, 0)
       if (media) {
         const shift = Math.max(-1.5, Math.min(1.5, active - index)) * parallax * mediaSizeRef.current * 0.06
         timeline.to(media, {
-          xPercent: isEmbed ? 0 : -50,
-          yPercent: isEmbed ? 0 : -50,
-          x: isEmbed ? 0 : isActive ? 0 : shift,
+          xPercent: -50,
+          yPercent: -50,
+          x: isActive ? 0 : shift,
           y: 0,
           '--ag-gray': grayscale ? (isActive ? 0 : 1) : 0, '--ag-dim': isActive ? 0 : 0.42,
           duration: seconds, ease,
@@ -89,7 +86,7 @@ function AccordionGallery({
       }
     })
     timelineRef.current = timeline
-  }, [active, count, duration, ease, expandRatio, grayscale, items, parallax, prefersReduced, showLabels, stagger, tilt])
+  }, [active, count, duration, ease, expandRatio, grayscale, parallax, prefersReduced, showLabels, stagger, tilt])
 
   useEffect(() => {
     const root = rootRef.current
@@ -110,22 +107,17 @@ function AccordionGallery({
   useEffect(() => { applyLayout(!firstRunRef.current); firstRunRef.current = false }, [applyLayout])
   useEffect(() => () => { timelineRef.current?.kill() }, [])
 
-  const handleClick = (index: number, event: MouseEvent<HTMLAnchorElement>) => {
-    if (index !== active || items[index]?.embedUrl) event.preventDefault()
-    setActive(index)
-    setEngagedEmbed(items[index]?.embedUrl ? index : null)
-  }
-  const handleKeyDown = (index: number, event: KeyboardEvent<HTMLAnchorElement>) => {
+  const handleKeyDown = (index: number, event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       event.preventDefault()
       const next = (index + 1) % count
       setActive(next)
-      setEngagedEmbed(items[next]?.embedUrl ? next : null)
+      panelRefs.current[next]?.focus()
     } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
       event.preventDefault()
       const previous = (index - 1 + count) % count
       setActive(previous)
-      setEngagedEmbed(items[previous]?.embedUrl ? previous : null)
+      panelRefs.current[previous]?.focus()
     }
   }
   const style: GalleryStyle = {
@@ -140,39 +132,20 @@ function AccordionGallery({
       style={style}
       role="list"
       aria-label="RnG Studios games"
-      onMouseLeave={() => setEngagedEmbed(null)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setEngagedEmbed(null)
-      }}
+
     >
       {items.map((item, index) => {
         const isActive = index === active
         return (
-          <a key={item.label ?? index} ref={(element) => { panelRefs.current[index] = element }}
-            className={`ag-panel${isActive ? ' ag-panel--active' : ''}`} href={item.link || '#games'}
-            onClick={(event) => handleClick(index, event)} onMouseEnter={() => {
-              if (trigger === 'hover') {
-                setActive(index)
-                setEngagedEmbed(item.embedUrl ? index : null)
-              }
-            }}
-            onFocus={() => {
-              setActive(index)
-              setEngagedEmbed(item.embedUrl ? index : null)
-            }} onKeyDown={(event) => handleKeyDown(index, event)}
-            role="listitem" aria-current={isActive ? 'true' : undefined} aria-label={item.label}>
+          <div key={`${item.label ?? 'panel'}-${index}`} ref={(element) => { panelRefs.current[index] = element }}
+            className={`ag-panel${isActive ? ' ag-panel--active' : ''}`} tabIndex={0}
+            onClick={() => setActive(index)}
+            onMouseEnter={() => { if (trigger === 'hover') setActive(index) }}
+            onFocus={() => setActive(index)} onKeyDown={(event) => handleKeyDown(index, event)}
+            role="listitem" aria-label={item.label}>
             <span className="ag-panel__frame">
-              <span className={`ag-panel__media${item.embedUrl ? ' ag-panel__media--embed' : ''}${item.embedUrl && isActive && engagedEmbed === index ? ' ag-panel__media--live' : ''}`} ref={(element) => { mediaRefs.current[index] = element }}>
+              <span className="ag-panel__media" ref={(element) => { mediaRefs.current[index] = element }}>
                 {item.image && <img src={item.image} alt={item.alt || item.label || ''} draggable="false" />}
-                {item.embedUrl && (
-                  <iframe
-                    src={item.embedUrl}
-                    title={`${item.label || 'Game'} live demo`}
-                    loading="eager"
-                    allow="autoplay; fullscreen; gamepad"
-                    allowFullScreen
-                  />
-                )}
               </span>
               <span className="ag-panel__overlay" aria-hidden="true" />
             </span>
@@ -183,7 +156,11 @@ function AccordionGallery({
                 <span className="ag-panel__text">{item.label}</span>
               </span>
             </span>}
-          </a>
+            {item.link && <a className="ag-panel__demo" href={item.link} target="_blank" rel="noopener noreferrer"
+              aria-label={`Play ${item.label || 'game'} demo (opens in a new tab)`}>
+              Play demo <span aria-hidden="true">↗</span>
+            </a>}
+          </div>
         )
       })}
     </div>

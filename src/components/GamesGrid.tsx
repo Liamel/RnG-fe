@@ -2,8 +2,8 @@ import './GamesGrid.css'
 import AccordionGallery, { type AccordionGalleryItem } from './AccordionGallery'
 
 const games: AccordionGalleryItem[] = [
-  { image: '/games/arknoid-key-art.jpg', embedUrl: 'https://arknoid-fe.vercel.app/', label: 'ARKNOID', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Colorful brick-breaker arcade key art for Arknoid' },
-  { image: '/games/spidey-key-art.jpg', embedUrl: 'https://arknoid-fe-spidey.vercel.app/', label: 'ARKNOID: SPIDEY', eyebrow: 'HOVER TO LOAD · LIVE DEMO', alt: 'Crimson web-swing arcade key art for Arknoid Spidey' },
+  { image: '/games/arknoid-key-art.jpg', link: 'https://arknoid-fe.vercel.app/', label: 'ARKNOID', eyebrow: 'PLAY DEMO · LIVE GAME', alt: 'Colorful brick-breaker arcade key art for Arknoid' },
+  { image: '/games/spidey-key-art.jpg', link: 'https://arknoid-fe-spidey.vercel.app/', label: 'ARKNOID: SPIDEY', eyebrow: 'PLAY DEMO · LIVE GAME', alt: 'Crimson web-swing arcade key art for Arknoid Spidey' },
   { image: '/games/vault-13-key-art.jpg', label: 'VAULT 13', eyebrow: 'MOCK TITLE · INSTANT WIN', alt: 'Futuristic golden vault key art' },
   { image: '/games/blackjack-zero-key-art.jpg', label: 'BLACKJACK ZERO', eyebrow: 'MOCK TITLE · TABLE', alt: 'Futuristic playing-card key art' },
   { image: '/games/orbit-key-art.jpg', label: 'ORBIT', eyebrow: 'MOCK TITLE · CRASH', alt: 'Neon spacecraft orbiting a planet' },
