@@ -1,22 +1,18 @@
+/* SKALD brand palette — values taken from the brand board PDF (sRGB) */
 :root {
-  --bg: #08080a;
-  --bg-panel: rgba(16, 15, 18, 0.92);
-  --bg-ticker: #0b0b0d;
-  --border-dark: #17171a;
-  --red: #c1121f;
-  --red-bright: #ff4038;
-  --red-soft: #ff6b4a;
-  --bone: #f2efe9;
-  --ink: #140809;
-  --ink-soft: #4a4550;
-  --gray: #97959e;
-  --gray-dim: #5b5960;
-  --green: #8fbd5a;
+  --red: #ff2424;
+  --red-deep: #9e0d0b;
+  --black: #100a08;
+  --black-deep: #080504;
+  --white: #ffffff;
+  --muted: #a8a09c;
+  --dim: #6d6460;
+  --line: rgba(255, 255, 255, 0.09);
 
-  --font-pixel: 'Press Start 2P', monospace;
-  --font-term: 'VT323', monospace;
+  --font-display: 'Syne', 'Arial Black', sans-serif;
 
-  --pad-x: clamp(20px, 5vw, 40px);
+  --pad-x: clamp(16px, 5vw, 72px);
+  --radius: 14px;
 
   color-scheme: dark;
 }
@@ -27,16 +23,21 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  overscroll-behavior-y: none;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--bone);
-  font-family: var(--font-term);
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--white);
 }
 
 a {
@@ -49,69 +50,96 @@ button {
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
 /* max-width content wrapper inside full-bleed sections */
 .wrap {
-  max-width: 1620px;
+  width: 100%;
+  max-width: 1440px;
   margin-inline: auto;
 }
 
-/* arcade bevel panel: raised 2px border + hard offset shadow */
-.bevel {
-  border: 2px solid;
-  border-color: rgba(255, 255, 255, 0.28) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
-    rgba(255, 255, 255, 0.28);
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+/* small spaced uppercase label with a red dash, used above headings */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
 }
 
-.bevel-strong {
-  border: 2px solid;
-  border-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.6) rgba(0, 0, 0, 0.6)
-    rgba(255, 255, 255, 0.35);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
-}
-
-/* CRT scanline overlay */
-.scanlines::before {
+.eyebrow::before {
   content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.03) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events: none;
+  width: 32px;
+  height: 2px;
+  background: var(--red);
+  flex: none;
 }
 
-/* diagonal-stripe placeholder art */
-.stripes-dark {
-  background: repeating-linear-gradient(
-    135deg,
-    #131316,
-    #131316 10px,
-    #101013 10px,
-    #101013 20px
-  );
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.stripes-panel {
-  background: repeating-linear-gradient(
-    135deg,
-    #17171a,
-    #17171a 10px,
-    #131316 10px,
-    #131316 20px
-  );
+.btn:hover {
+  transform: translateY(-2px);
 }
 
-.stripes-red {
-  background: repeating-linear-gradient(
-    135deg,
-    #1c0a0c,
-    #1c0a0c 10px,
-    #17090b 10px,
-    #17090b 20px
-  );
+.btn-red {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 10px 40px -12px rgba(255, 36, 36, 0.7);
+}
+
+.btn-red:hover {
+  background: #ff3d3d;
+}
+
+.btn-ghost {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--white);
+  backdrop-filter: blur(6px);
+}
+
+.btn-ghost:hover {
+  border-color: var(--white);
+}
+
+.btn-black {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-black:hover {
+  background: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
 }

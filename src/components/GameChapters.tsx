@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import AccordionGallery, { type AccordionGalleryItem } from './AccordionGallery'
 import FoldText from './FoldText'
+import { SkaldMark } from './Brand'
 import './GameChapters.css'
 
 const crashGames: AccordionGalleryItem[] = [
@@ -21,16 +22,34 @@ const slotGames: AccordionGalleryItem[] = [
   { image:'/games/orbit-key-art.jpg', label:'COSMIC REELS', eyebrow:'SLOTS · IN DEVELOPMENT', alt:'Cosmic Reels slot game concept' },
 ]
 
-function Chapter({ id, index, kicker, title, copy, items, accent, tone }:{ id:string; index:string; kicker:string; title:string; copy:string; items:AccordionGalleryItem[]; accent:string; tone:'red'|'violet' }) {
-  return <section className={`game-chapter game-chapter--${tone}`} id={id}>
+const liveTitles = ['ARKNOID', 'SPIDEY', 'JADE GARDEN', 'PISTA SPIN', 'ANIWILDER']
+
+function Marquee() {
+  // two identical runs so the -50% translate loops seamlessly
+  const run = liveTitles.flatMap((title) => [title, 'mark'])
+  return <div className="marquee" aria-hidden="true">
+    <div className="marquee-track">
+      {[...run, ...run].map((item, index) => item === 'mark'
+        ? <SkaldMark key={index} className="marquee-mark" />
+        : <span key={index}>{item}</span>)}
+    </div>
+  </div>
+}
+
+function Chapter({ id, index, kicker, title, copy, items, flip = false }:{ id:string; index:string; kicker:string; title:string; copy:string; items:AccordionGalleryItem[]; flip?:boolean }) {
+  return <section className={`chapter${flip ? ' chapter--flip' : ''}`} id={id}>
+    <div className="chapter-beam" aria-hidden="true" />
     <div className="chapter-no" aria-hidden="true">{index}</div>
     <div className="chapter-inner wrap">
       <div className="chapter-heading">
-        <div><p className="chapter-kicker"><span />{kicker}</p><FoldText text={title} splitBy="word" hinge={tone === 'red' ? 'top' : 'bottom'} fontSize="clamp(2.6rem, 6.2vw, 6.25rem)" /></div>
+        <div>
+          <p className="eyebrow">{kicker}</p>
+          <FoldText text={title} splitBy="word" hinge={flip ? 'bottom' : 'top'} fontSize="clamp(2.4rem, 6vw, 5.75rem)" color="var(--white)" />
+        </div>
         <p className="chapter-copy">{copy}</p>
       </div>
-      <AccordionGallery items={items} defaultIndex={0} accentColor={accent} overlayColor={tone === 'red' ? '#130305' : '#09051a'} expandRatio={0.48} height={350} gap={8} />
-      <div className="chapter-foot"><span>01—06</span><span>HOVER / TAP TO EXPLORE</span><span>RNG STUDIOS®</span></div>
+      <AccordionGallery items={items} defaultIndex={0} accentColor="#ff2424" overlayColor="#100a08" expandRatio={0.48} height={380} gap={10} radius={14} />
+      <div className="chapter-foot"><span>{String(items.length).padStart(2, '0')} TITLES</span><span>HOVER / TAP TO EXPLORE</span><span>SKALD GAMING</span></div>
     </div>
   </section>
 }
@@ -58,9 +77,36 @@ export default function GameChapters(){
   <aside className="chapter-rail" aria-label="Page sections">
     {sections.map((section) => <a key={section.id} href={`#${section.id}`} className={activeSection === section.id ? 'is-active' : ''} aria-current={activeSection === section.id ? 'location' : undefined}><span>{section.label}</span><i /></a>)}
   </aside>
-  <section className="opening" id="top"><div className="opening-grid" aria-hidden="true"/><p className="opening-kicker">INDEPENDENT GAME STUDIO · BERLIN / WORLDWIDE</p><FoldText text={'WE MAKE\nCHANCE FEEL\nELECTRIC.'} splitBy="line" trigger="mount" fontSize="clamp(2.75rem, 7.4vw, 7.5rem)" /><a href="#crash" className="opening-scroll">SCROLL TO EXPLORE <span>↓</span></a></section>
-  <Chapter id="crash" index="01" kicker="CATEGORY ONE" title="CRASH GAMES" copy="Fast rounds. Clean tension. Every second is a decision. Explore our high-energy crash portfolio." items={crashGames} accent="#ff4b35" tone="red" />
-  <Chapter id="slots" index="02" kicker="CATEGORY TWO" title="SLOT GAMES" copy="Three reel worlds have live demos ready to play — Jade Garden, Pista Spin and Aniwilder. Three more are spinning into shape in the lab." items={slotGames} accent="#b89cff" tone="violet" />
-  <section className="closing" id="about"><p>BUILD THE NEXT HIT WITH US.</p><FoldText text="LET'S PLAY." splitBy="word" fontSize="clamp(3.2rem, 8vw, 7.5rem)" color="#08080a"/><a href="mailto:hello@rngstudios.com">START A CONVERSATION ↗</a></section>
+
+  <section className="hero" id="top">
+    <img className="hero-art" src="/brand/hero.jpg" alt="" />
+    <div className="hero-shade" aria-hidden="true" />
+    <div className="hero-inner wrap">
+      <p className="eyebrow">Independent game studio</p>
+      <h1 className="hero-title">
+        <FoldText text={'WE MAKE\nCHANCE FEEL\nELECTRIC.'} splitBy="line" trigger="mount" fontSize="clamp(2rem, 6.4vw, 6.75rem)" color="var(--white)" />
+      </h1>
+      <p className="hero-sub">Crash and slot games with fast rounds, clean tension and worlds worth coming back to.</p>
+      <div className="hero-ctas">
+        <a className="btn btn-red" href="#crash">Explore games</a>
+        <a className="btn btn-ghost" href="https://arknoid-fe.vercel.app/" target="_blank" rel="noopener noreferrer">Play Arknoid <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <a href="#crash" className="hero-scroll" aria-label="Scroll to games"><span>SCROLL</span><i /></a>
+  </section>
+
+  <Marquee />
+
+  <Chapter id="crash" index="01" kicker="Category 01 — Crash" title="CRASH GAMES" copy="Fast rounds. Clean tension. Every second is a decision. Explore our high-energy crash portfolio." items={crashGames} />
+  <Chapter id="slots" index="02" kicker="Category 02 — Slots" title="SLOT GAMES" copy="Three reel worlds have live demos ready to play — Jade Garden, Pista Spin and Aniwilder. Three more are spinning into shape in the lab." items={slotGames} flip />
+
+  <section className="closing" id="about">
+    <SkaldMark className="closing-mark" />
+    <div className="closing-inner wrap">
+      <p className="closing-kicker">Build the next hit with us.</p>
+      <FoldText text="LET'S PLAY." splitBy="word" fontSize="clamp(3.2rem, 11vw, 10rem)" color="var(--black)" />
+      <a className="btn btn-black closing-cta" href="mailto:hello@skaldgaming.com">Start a conversation <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
   </>
 }

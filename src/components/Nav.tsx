@@ -1,35 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { SkaldLogo } from './Brand'
 import './Nav.css'
 
 const links = [
-  { label: 'CRASH', href: '#crash' },
-  { label: 'SLOTS', href: '#slots' },
-  { label: 'ABOUT', href: '#about' },
+  { label: 'Crash', href: '#crash' },
+  { label: 'Slots', href: '#slots' },
+  { label: 'Studio', href: '#about' },
 ]
-
-function DieLogo() {
-  return (
-    <div className="nav-die bevel-strong" aria-hidden="true">
-      <span className="d d-tl" />
-      <span className="d d-tr" />
-      <span className="d d-c" />
-      <span className="d d-bl" />
-      <span className="d d-br" />
-    </div>
-  )
-}
 
 function Nav() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="nav">
+    <header className={`nav${scrolled || open ? ' nav--solid' : ''}`}>
       <div className="nav-inner wrap">
-        <a className="nav-brand" href="#top" onClick={() => setOpen(false)}>
-          <DieLogo />
-          <span className="nav-wordmark">
-            R<span className="nav-n">n</span>G <span className="nav-studios">STUDIOS</span>
-          </span>
+        <a className="nav-brand" href="#top" aria-label="SKALD Gaming — home" onClick={() => setOpen(false)}>
+          <SkaldLogo />
         </a>
 
         <nav className="nav-links" aria-label="Main">
@@ -38,8 +32,8 @@ function Nav() {
               {link.label}
             </a>
           ))}
-          <a className="nav-cta bevel-strong" href="#contact">
-            PARTNER WITH US
+          <a className="btn btn-red nav-cta" href="#about">
+            Partner with us
           </a>
         </nav>
 
@@ -52,7 +46,6 @@ function Nav() {
         >
           <span />
           <span />
-          <span />
         </button>
       </div>
 
@@ -63,12 +56,8 @@ function Nav() {
               {link.label}
             </a>
           ))}
-          <a
-            className="nav-cta bevel-strong"
-            href="#contact"
-            onClick={() => setOpen(false)}
-          >
-            PARTNER WITH US
+          <a className="btn btn-red" href="#about" onClick={() => setOpen(false)}>
+            Partner with us
           </a>
         </nav>
       )}

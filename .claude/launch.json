@@ -3,8 +3,11 @@
   "configurations": [
     {
       "name": "rng-studios",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "PATH=$HOME/.nvm/versions/node/v22.23.2/bin:$PATH pnpm dev --port 5173"
+      ],
       "port": 5173,
       "autoPort": true
     }

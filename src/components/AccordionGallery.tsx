@@ -131,7 +131,7 @@ function AccordionGallery({
       className={`accordion-gallery${className ? ` ${className}` : ''}`}
       style={style}
       role="list"
-      aria-label="RnG Studios games"
+      aria-label="SKALD games"
 
     >
       {items.map((item, index) => {
