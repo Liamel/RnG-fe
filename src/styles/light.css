@@ -1,0 +1,115 @@
+/* =========================================================
+   SKALD GAMING — Light theme
+   Activated by <html data-theme="light"> (see the inline script in each page <head>
+   and the theme toggle in js/main.js). Dark is the default brand theme.
+   Most of the site follows the tokens; the rules below cover hard-coded surfaces.
+   ========================================================= */
+:root { color-scheme: dark; }
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3efea;
+  --bg-2: #ebe5df;
+  --panel: #ffffff;
+  --line: rgba(24, 18, 16, .09);
+  --line-2: rgba(24, 18, 16, .16);
+  --ink: #15161b;
+  --muted: #5c606b;
+  --dim: #8c8f98;
+  --red: #e3112f;
+  --red-2: #b8001b;
+  --red-glow: rgba(227, 17, 47, .32);
+  --grad-red: linear-gradient(90deg, #ff4d5e, #e3112f 50%, #b8001b);
+
+  --glass: linear-gradient(115deg, rgba(255, 255, 255, .85) 0%, rgba(255, 255, 255, .35) 42%), linear-gradient(145deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, .32));
+  --glass-strong: linear-gradient(115deg, rgba(255, 255, 255, .92) 0%, rgba(255, 255, 255, .5) 42%), rgba(249, 246, 242, .82);
+  --glass-border: rgba(24, 18, 16, .1);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(24, 18, 16, .04);
+  --glass-shadow: 0 24px 60px -30px rgba(70, 30, 30, .28);
+}
+
+/* Dark islands: artwork-like surfaces keep the dark palette inside light mode */
+[data-theme="light"] :is(.code, .demo, .hero-hud, .reel, .visual) {
+  --ink: #f2f3f5; --muted: #8b909c; --dim: #555a66;
+  --line: rgba(255, 255, 255, .08); --line-2: rgba(255, 255, 255, .14);
+  --glass: linear-gradient(115deg, rgba(255, 255, 255, .09) 0%, transparent 38%), linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .012));
+  --glass-strong: linear-gradient(115deg, rgba(255, 255, 255, .1) 0%, transparent 40%), linear-gradient(145deg, rgba(22, 25, 33, .9), rgba(12, 14, 19, .88));
+  --glass-border: rgba(255, 255, 255, .12);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, .14);
+  color: var(--ink);
+}
+
+/* Atmosphere */
+[data-theme="light"] .bg-glow {
+  background:
+    radial-gradient(900px 600px at 78% 18%, rgba(227, 17, 47, .1), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(227, 17, 47, .06), transparent 60%),
+    var(--bg);
+}
+[data-theme="light"] .bg-grid { opacity: .7; }
+[data-theme="light"] .dust { display: none; }
+[data-theme="light"] .orbs i { opacity: .09; }
+[data-theme="light"] .orbs i:nth-child(2) { opacity: .07; }
+[data-theme="light"] .orbs i:nth-child(3) { opacity: .08; }
+
+/* Header + logo: wordmark switches to dark ink, the red mark stays red */
+[data-theme="light"] .site-header { backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); }
+[data-theme="light"] .site-header, [data-theme="light"] .site-header.scrolled { background: linear-gradient(115deg, rgba(255, 255, 255, .7), transparent 40%), rgba(243, 239, 234, .62); box-shadow: inset 0 -1px 0 rgba(24, 18, 16, .07); }
+[data-theme="light"] .logo-wordmark { filter: brightness(0) saturate(100%); opacity: .92; }
+
+/* Hero: fade the dark render into the light page */
+[data-theme="light"] .hero-shade {
+  background:
+    linear-gradient(90deg, var(--bg) 0%, rgba(243, 239, 234, .94) 24%, rgba(243, 239, 234, .55) 42%, transparent 62%),
+    linear-gradient(180deg, rgba(243, 239, 234, .9) 0%, transparent 18%, transparent 72%, var(--bg) 100%);
+}
+@media (max-width: 920px) {
+  [data-theme="light"] .hero-shade { background: linear-gradient(180deg, rgba(243, 239, 234, .6) 0%, rgba(243, 239, 234, .5) 30%, rgba(243, 239, 234, .94) 62%, var(--bg) 80%); }
+}
+
+/* Showcase */
+[data-theme="light"] .flow-card { box-shadow: var(--glass-edge), 0 30px 70px -30px rgba(70, 30, 30, .45); }
+[data-theme="light"] .flow-card.on { box-shadow: var(--glass-edge), 0 0 60px -12px var(--red-glow), 0 40px 90px -30px rgba(70, 30, 30, .5); }
+[data-theme="light"] .flow-stage::after { background: radial-gradient(ellipse at center, rgba(227, 17, 47, .22), transparent 70%); }
+[data-theme="light"] .flow-dots button { background: rgba(24, 18, 16, .15); }
+[data-theme="light"] .flow-dots button:hover { background: rgba(24, 18, 16, .35); }
+[data-theme="light"] .flow-dots button.on { background: var(--red); }
+
+/* Diagrams, panels, footer */
+[data-theme="light"] .nodes .wires path { stroke: rgba(24, 18, 16, .2); }
+[data-theme="light"] .nodes .wires .flow { stroke: var(--red); }
+[data-theme="light"] .nodes .wires circle { stroke: rgba(24, 18, 16, .1); }
+[data-theme="light"] .cta-box { background: var(--glass); border-color: var(--glass-border); box-shadow: var(--glass-edge), var(--glass-shadow); }
+[data-theme="light"] .footer-big { -webkit-text-stroke: 1px rgba(24, 18, 16, .13); }
+[data-theme="light"] .modal-backdrop { background: rgba(40, 28, 26, .4); }
+[data-theme="light"] .modal-card { box-shadow: var(--glass-edge), 0 40px 120px -30px rgba(70, 30, 30, .45); }
+[data-theme="light"] .specs > div { background: rgba(255, 255, 255, .55); }
+[data-theme="light"] .code { background: linear-gradient(115deg, rgba(255, 255, 255, .06), transparent 40%), #121318; }
+[data-theme="light"] .slot { box-shadow: var(--glass-edge), var(--glass-shadow); }
+
+/* Skald Quest */
+[data-theme="light"] .quest-pill, [data-theme="light"] .quest-panel { box-shadow: var(--glass-edge), 0 18px 50px -20px rgba(70, 30, 30, .35); }
+[data-theme="light"] .q-bar { background: rgba(24, 18, 16, .1); }
+[data-theme="light"] .q-runes b, [data-theme="light"] .qp-runes b { color: rgba(24, 18, 16, .2); }
+[data-theme="light"] .q-runes b.on, [data-theme="light"] .qp-runes b.on { color: var(--red); }
+[data-theme="light"] .toast { box-shadow: var(--glass-edge), 0 0 40px -14px var(--red-glow), 0 20px 50px -20px rgba(70, 30, 30, .35); }
+[data-theme="light"] .xp-float { color: var(--red); text-shadow: 0 0 14px rgba(227, 17, 47, .3), 0 2px 0 #fff; }
+
+/* Theme toggle */
+.theme-toggle {
+  position: relative; width: 40px; height: 40px; flex: none; display: grid; place-items: center;
+  background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border); box-shadow: var(--glass-edge); color: var(--ink);
+  transition: border-color .25s, background .25s;
+}
+.theme-toggle:hover { border-color: rgba(255, 45, 70, .55); }
+.theme-toggle svg { position: absolute; width: 18px; height: 18px; transition: transform .5s var(--ease), opacity .3s; }
+.theme-toggle .i-sun { opacity: 0; transform: rotate(-90deg) scale(.6); }
+[data-theme="light"] .theme-toggle .i-sun { opacity: 1; transform: none; color: var(--red); }
+[data-theme="light"] .theme-toggle .i-moon { opacity: 0; transform: rotate(90deg) scale(.6); }
+.nav-tools { display: flex; align-items: center; gap: 10px; }
+
+/* Smooth cross-fade while switching */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color .45s ease, color .45s ease, border-color .45s ease, fill .45s ease, stroke .45s ease !important;
+}
