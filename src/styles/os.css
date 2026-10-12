@@ -1,7 +1,7 @@
 /* =========================================================
    SKALD ENTERTAINMENT SYSTEM — the site as a 2000s console
    dashboard: chrome titles, glossy bevelled panels, pulsing
-   selection, system bar with shoulder buttons, controller
+   selection, system bar with clock, controller
    prompts, boot screen and channel-switch page changes.
    Loaded last; builds on the CRT signal layer (crt.css).
    ========================================================= */
@@ -92,7 +92,6 @@ h1 *, h2 * { text-shadow: none !important; }
   backdrop-filter: none; -webkit-backdrop-filter: none;
 }
 .nav { height: 72px; }
-.sys-menu { display: flex; align-items: center; gap: 10px; }
 .nav-links {
   gap: 4px; padding: 4px; border-radius: 999px; background: rgba(0, 0, 0, .55);
   border: 1px solid rgba(255, 255, 255, .08); box-shadow: inset 0 2px 6px rgba(0, 0, 0, .7);
@@ -102,13 +101,6 @@ h1 *, h2 * { text-shadow: none !important; }
 .nav-links a.active { background: var(--gloss-red); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 0 18px -4px var(--red-glow); }
 .nav-links a.active span { color: rgba(255, 255, 255, .75); }
 .nav-links a.active::after { display: none; }
-.shoulder {
-  height: 26px; padding: 0 10px; border-radius: 10px 10px 4px 4px; font: 700 10px/1 var(--mono); letter-spacing: .08em; color: var(--muted);
-  background: linear-gradient(180deg, #3a3b42, #17171c); border: 1px solid rgba(255, 255, 255, .14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 3px 0 #000;
-  transition: transform .1s, color .2s;
-}
-.shoulder:hover { color: #fff; }
-.shoulder:active { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 0 #000; }
 .sys-clock { display: inline-flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); letter-spacing: .08em; color: var(--muted); }
 .sys-clock i { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 8px #3ddc84; }
 
@@ -208,8 +200,7 @@ h1 *, h2 * { text-shadow: none !important; }
   .sys-clock { display: none; }
 }
 @media (max-width: 920px) {
-  .sys-menu { display: contents; }
-  .shoulder, .prompts { display: none; }
+  .prompts { display: none; }
   .nav-links { background: none; border: 0; box-shadow: none; padding: 0; }
   .site-header.open .nav-links a { border-radius: 0; background: none; box-shadow: none; }
   .site-header.open .nav-links a.active { color: var(--red); }

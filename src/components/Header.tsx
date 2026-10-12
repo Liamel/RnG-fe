@@ -5,7 +5,7 @@ import { Logo } from './Logo'
 
 const time = () => new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
 
-/** Console system bar: shoulder buttons (Q / E) cycle through the pages, plus a system clock. */
+/** Console system bar with a system clock; Q / E cycle through the pages. */
 export default function Header() {
   const { pathname } = useLocation()
   const navigate = useNavigate()
@@ -38,15 +38,11 @@ export default function Header() {
     <header className={`site-header${scrolled ? ' scrolled' : ''}${open ? ' open' : ''}`}>
       <div className="wrap nav">
         <Link to="/" aria-label="Skald Gaming home"><Logo /></Link>
-        <div className="sys-menu">
-          <button className="shoulder" onClick={() => step(-1)} aria-label="Previous page (Q)">L1</button>
-          <ul className="nav-links">
-            {NAV_LINKS.map(([to, label], i) => (
-              <li key={to}><Link to={to} className={pathname === to ? 'active' : ''}><span>0{i + 1}</span>{label}</Link></li>
-            ))}
-          </ul>
-          <button className="shoulder" onClick={() => step(1)} aria-label="Next page (E)">R1</button>
-        </div>
+        <ul className="nav-links">
+          {NAV_LINKS.map(([to, label], i) => (
+            <li key={to}><Link to={to} className={pathname === to ? 'active' : ''}><span>0{i + 1}</span>{label}</Link></li>
+          ))}
+        </ul>
         <div className="nav-tools">
           <span className="sys-clock" aria-label="Local time"><i />{clock}</span>
           <Link className="btn btn-line nav-cta" to="/contact">Partner with us <span className="ar">↗</span></Link>
