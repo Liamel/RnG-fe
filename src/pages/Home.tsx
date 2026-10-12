@@ -20,7 +20,7 @@ function Hero() {
     if (!matchMedia('(pointer: fine)').matches) return
     // the rect is measured once per hover (not per move) and the stage moves at most once per frame
     let rect: DOMRect | null = null, raf = 0, px = 0, py = 0
-    const apply = () => { raf = 0; stage.current!.style.translate = `${-px * 24}px ${-py * 16}px` }
+    const apply = () => { raf = 0; stage.current!.style.translate = `${-px * 19}px ${-py * 13}px` }
     const onEnter = () => { rect = el.getBoundingClientRect() }
     const onMove = (e: PointerEvent) => {
       rect ??= el.getBoundingClientRect()

@@ -6,8 +6,8 @@
    ========================================================= */
 :root {
   /* resting chromatic aberration + bloom */
-  --ca: 1.4px 0 rgba(255, 40, 40, .55), -1.4px 0 rgba(70, 190, 255, .5), 0 0 22px rgba(255, 255, 255, .18);
-  --ca-hit: 14px 0 rgba(255, 40, 40, .9), -14px 0 rgba(70, 190, 255, .9), 0 0 40px rgba(255, 255, 255, .6);
+  --ca: 1.4px 0 rgba(255, 40, 40, .55), -1.4px 0 rgba(70, 190, 255, .5), 0 0 17.6px rgba(255, 255, 255, .18);
+  --ca-hit: 11.2px 0 rgba(255, 40, 40, .9), -11.2px 0 rgba(70, 190, 255, .9), 0 0 32px rgba(255, 255, 255, .6);
   --rune: "Noto Sans Runic", "Segoe UI Historic", serif;
   --scan: .22;
 }
@@ -16,7 +16,7 @@
 .crt { pointer-events: none; position: fixed; inset: 0; z-index: 90; }
 .crt::before {
   content: ""; position: absolute; inset: 0;
-  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, var(--scan)) 2px 3px);
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, var(--scan)) 2px 2.4px);
 }
 .crt::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .5) 100%); }
 .noise {
@@ -40,32 +40,32 @@ h2.reveal.in, .reveal.in h2, .page-hero h1 { animation: hit 1.2s cubic-bezier(.1
 /* ---------- Glitch slices (useGlitch toggles .glitching) ---------- */
 .glitch { position: relative; display: inline-block; }
 .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; text-shadow: none; white-space: nowrap; }
-.glitching::before { opacity: .85; color: #ff3030; transform: translateX(-5px); clip-path: inset(22% 0 66% 0); }
-.glitching::after { opacity: .85; color: #7ebae4; transform: translateX(6px); clip-path: inset(70% 0 18% 0); }
+.glitching::before { opacity: .85; color: #ff3030; transform: translateX(-4px); clip-path: inset(22% 0 66% 0); }
+.glitching::after { opacity: .85; color: #7ebae4; transform: translateX(4.8px); clip-path: inset(70% 0 18% 0); }
 
 /* ---------- Runes ---------- */
 .rune { font-family: var(--rune); font-weight: 400; letter-spacing: .12em; }
-.runes-line { display: block; margin: -12px 0 26px; font-size: clamp(16px, 1.8vw, 26px); line-height: 1.2; color: var(--ink); text-shadow: var(--ca); }
-.page-hero .runes-line { margin: 18px 0 0; font-size: clamp(14px, 1.4vw, 20px); color: var(--muted); text-shadow: none; }
-.sec-rune { display: block; margin-top: 14px; font-size: clamp(13px, 1.3vw, 18px); color: var(--dim); }
+.runes-line { display: block; margin: -9.6px 0 20.8px; font-size: clamp(12.8px, 1.8vw, 20.8px); line-height: 1.2; color: var(--ink); text-shadow: var(--ca); }
+.page-hero .runes-line { margin: 14.4px 0 0; font-size: clamp(11.2px, 1.4vw, 16px); color: var(--muted); text-shadow: none; }
+.sec-rune { display: block; margin-top: 11.2px; font-size: clamp(10.4px, 1.3vw, 14.4px); color: var(--dim); }
 .hidden-rune, .q-runes b, .qp-runes b, .toast .tg, .qp-list .g { font-family: var(--rune); }
 
 /* blinking block cursor after the hero index line */
 .hero-grid > div > .idx:first-child::after, .page-hero .row > div > .idx:first-child::after {
-  content: ""; display: inline-block; width: .6em; height: 1.1em; margin-left: 8px; vertical-align: -2px;
+  content: ""; display: inline-block; width: .6em; height: 1.1em; margin-left: 6.4px; vertical-align: -2px;
   background: var(--red); animation: cursor 1s steps(1) infinite;
 }
 @keyframes cursor { 50% { opacity: 0; } }
 
 /* ---------- Ticker (replaces the three-item strip) ---------- */
 .strip { overflow: hidden; }
-.ticker { overflow: hidden; padding: 18px 0; }
+.ticker { overflow: hidden; padding: 14.4px 0; }
 .ticker .track { display: flex; width: max-content; animation: ticker 40s linear infinite; }
 .ticker ul {
-  display: flex; align-items: center; gap: 28px; margin: 0; padding: 0 14px; list-style: none; white-space: nowrap;
-  font-family: var(--mono); font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: center; gap: 22.4px; margin: 0; padding: 0 11.2px; list-style: none; white-space: nowrap;
+  font-family: var(--mono); font-size: 9.2px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
 }
-.ticker li.r { font: 400 16px/1 var(--rune); letter-spacing: 0; color: var(--red); text-shadow: 0 0 10px var(--red); }
+.ticker li.r { font: 400 12.8px/1 var(--rune); letter-spacing: 0; color: var(--red); text-shadow: 0 0 8px var(--red); }
 .strip:hover .ticker .track { animation-play-state: paused; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 

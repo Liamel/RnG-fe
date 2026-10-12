@@ -66,7 +66,7 @@ export default function Integration() {
           </div>
           <div>
             <p className="lead">Connect once to our remote game server and unlock the full Skald catalogue, from sandbox to live in as little as 14 days.</p>
-            <div className="hero-cta" style={{ marginTop: 28 }}>
+            <div className="hero-cta" style={{ marginTop: 18 }}>
               <Link className="btn btn-red" to="/contact">Get sandbox keys <span className="ar">↗</span></Link>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function Integration() {
         <div className="wrap split" style={{ alignItems: 'start' }}>
           <div>
             <span className="label reveal">Tech specs</span>
-            <h2 className="reveal d1" style={{ marginTop: 22 }}>Built<br /><span className="r">for scale.</span></h2>
+            <h2 className="reveal d1" style={{ marginTop: 18 }}>Built<br /><span className="r">for scale.</span></h2>
           </div>
           <div className="spec-table reveal d1">
             <div><span>Technology</span><b>HTML5 · WebGL · Mobile-first</b></div>
@@ -112,7 +112,7 @@ export default function Integration() {
             <div><span>Uptime SLA</span><b>99.95%</b></div>
             <div><span>Engagement</span><b>Free rounds · Jackpots · Tournaments</b></div>
             <div><span>Compliance</span><b>Per-market RTP, bet limits &amp; reality checks</b></div>
-            <HiddenRune page="integration" style={{ right: 10, bottom: -34 }} />
+            <HiddenRune page="integration" style={{ right: 8, bottom: -27 }} />
           </div>
         </div>
       </section>

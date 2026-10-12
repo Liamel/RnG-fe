@@ -36,10 +36,10 @@ export default function Games() {
           </div>
           <p className="lead">Filter by format, open any title for its maths and specs, and request a demo in one click.</p>
         </div>
-        <HiddenRune page="games" style={{ right: '4%', bottom: 22 }} />
+        <HiddenRune page="games" style={{ right: '4%', bottom: 18 }} />
       </section>
 
-      <section style={{ paddingTop: 60 }}>
+      <section style={{ paddingTop: 48 }}>
         <div className="wrap">
           <div className="toolbar">
             <div className="filters" role="tablist" aria-label="Filter games">

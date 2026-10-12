@@ -41,7 +41,7 @@ export default function QuestLayer() {
         setTimeout(() => setFloats((fs) => fs.filter((x) => x.id !== f.id)), 1400)
       } else if (fx.type === 'burst') {
         const ps = Array.from({ length: fx.n }, () => {
-          const a = Math.random() * Math.PI * 2, d = 80 + Math.random() * 220
+          const a = Math.random() * Math.PI * 2, d = 64 + Math.random() * 176
           return { id: ++uid, x: fx.x, y: fx.y, dx: Math.cos(a) * d, dy: Math.sin(a) * d, r: Math.random() * 720 - 360, white: Math.random() <= .3 }
         })
         const ids = new Set(ps.map((p) => p.id))

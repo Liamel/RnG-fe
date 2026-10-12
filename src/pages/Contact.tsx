@@ -47,7 +47,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section style={{ paddingTop: 60 }}>
+      <section style={{ paddingTop: 48 }}>
         <div className="wrap contact-grid">
           <div className="form-wrap">
             <form id="contact-form" className="form" noValidate onSubmit={submit} style={sent ? { display: 'none' } : undefined} key={params.toString()}>
@@ -80,7 +80,7 @@ export default function Contact() {
             {/* Placeholder address */}
             <div className="side-item"><span className="label">Headquarters</span><p>Your street address<br />City, Country</p></div>
             <div className="side-item"><span className="label">Events</span><p>Meet us at the major iGaming expos.</p></div>
-            <HiddenRune page="contact" style={{ right: 16, bottom: 14 }} />
+            <HiddenRune page="contact" style={{ right: 13, bottom: 11 }} />
           </div>
         </div>
       </section>
