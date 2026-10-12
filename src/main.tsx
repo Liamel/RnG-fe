@@ -5,6 +5,8 @@ import './styles/styles.css'
 import './styles/quest.css'
 import './styles/crt.css'
 import './styles/os.css'
+import './styles/light.css'
+import './styles/settings.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(

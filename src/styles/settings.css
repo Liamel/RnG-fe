@@ -1,0 +1,38 @@
+/* =========================================================
+   DISPLAY SETTINGS — header toggles for theme and CRT.
+   <html data-crt="off"> turns the CRT signal off: no scanlines,
+   grain, vignette, colour fringing, glitch tears or channel
+   flash. Loaded last.
+   ========================================================= */
+[data-crt="off"] { --ca: 0 0 0 transparent; }
+[data-crt="off"] .crt, [data-crt="off"] .noise, [data-crt="off"] .channel-switch { display: none; }
+[data-crt="off"] :is(h1, h2, .footer-big) { filter: none; }
+[data-crt="off"] .glitch::before, [data-crt="off"] .glitch::after { display: none; }
+[data-crt="off"] .runes-line, [data-crt="off"] .ticker li.r { text-shadow: none; }
+/* scanline textures baked into artwork panels */
+[data-crt="off"] .art::after { background: linear-gradient(180deg, transparent 50%, rgba(5, 6, 8, .9) 100%); }
+[data-crt="off"] .visual:has(img)::after { background: linear-gradient(180deg, transparent 60%, rgba(8, 9, 12, .7)); }
+[data-crt="off"] .avatar::after { display: none; }
+
+/* ---------- Header toggles (header stays at 100% scale) ---------- */
+.nav-tools { display: flex; align-items: center; gap: 10px; }
+.set-toggle {
+  position: relative; height: 40px; flex: none; display: inline-grid; place-items: center; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--glass-edge); color: var(--ink);
+  transition: border-color .25s, color .25s;
+}
+.set-toggle:hover { border-color: rgba(255, 42, 61, .6); }
+.theme-toggle { width: 40px; }
+.theme-toggle svg { grid-area: 1 / 1; width: 18px; height: 18px; transition: transform .45s var(--ease), opacity .3s; }
+.theme-toggle .i-sun { opacity: 0; transform: rotate(-90deg) scale(.6); }
+[data-theme="light"] .theme-toggle .i-sun { opacity: 1; transform: none; color: var(--red); }
+[data-theme="light"] .theme-toggle .i-moon { opacity: 0; transform: rotate(90deg) scale(.6); }
+.crt-toggle { grid-auto-flow: column; gap: 8px; padding: 0 14px; font: 700 11px/1 var(--mono); letter-spacing: .14em; }
+.crt-toggle i { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 8px #3ddc84; transition: background .25s, box-shadow .25s; }
+[data-crt="off"] .crt-toggle { color: var(--muted); }
+[data-crt="off"] .crt-toggle i { background: var(--dim); box-shadow: none; }
+
+@media (max-width: 920px) {
+  .set-toggle { height: 44px; }
+  .theme-toggle { width: 44px; }
+}

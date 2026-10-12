@@ -1,0 +1,101 @@
+/* =========================================================
+   LIGHT THEME — the console dashboard in glossy white
+   (silver panels, gunmetal chrome titles). Activated by
+   <html data-theme="light">: the toggle in the header, applied
+   before first paint by the inline script in index.html.
+   Dark is the default. Loaded after os.css.
+   ========================================================= */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eceef2;
+  --bg-2: #e3e6eb;
+  --panel: #ffffff;
+  --line: rgba(18, 20, 28, .1);
+  --line-2: rgba(18, 20, 28, .17);
+  --ink: #121318;
+  --muted: #555a66;
+  --dim: #868b96;
+  --red: #e3112f;
+  --red-2: #b8001b;
+  --red-glow: rgba(227, 17, 47, .3);
+  --grad-red: linear-gradient(180deg, #ff4d5e, #e3112f 45%, #b8001b);
+
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .55) 42%), linear-gradient(180deg, #f8f9fb, #e6e9ee);
+  --glass-strong: linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .6) 30%), linear-gradient(180deg, #fafbfc, #e4e7ec);
+  --glass-border: rgba(18, 20, 28, .13);
+  --glass-edge: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(18, 20, 28, .06);
+  --glass-shadow: 0 11px 27px -14px rgba(30, 34, 48, .35);
+  --gloss-red: linear-gradient(180deg, rgba(255, 255, 255, .42), rgba(255, 255, 255, 0) 52%), linear-gradient(180deg, #ff3b4f, #c4001e);
+
+  /* gunmetal chrome reads on a light page */
+  --chrome: linear-gradient(180deg, #4a4e58 0%, #17181d 40%, #6a6f7a 52%, #23252c 66%, #0f1014 100%);
+  --chrome-red: linear-gradient(180deg, #ff6a78 0%, #e3112f 38%, #8c0016 52%, #e8203a 66%, #a8001c 100%);
+}
+
+/* Dark islands: rendered artwork and screens keep the dark palette */
+[data-theme="light"] :is(.code, .demo-frame, .hero-hud, .reel, .visual, .boot, .now-loading) {
+  --ink: #f2f3f5; --muted: #8b909c; --dim: #555a66;
+  --line: rgba(255, 255, 255, .08); --line-2: rgba(255, 255, 255, .14);
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, 0) 42%), linear-gradient(180deg, #16161c, #0b0b0f);
+  --glass-border: rgba(255, 255, 255, .13);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, .16), inset 0 -1px 0 rgba(0, 0, 0, .7);
+  color: var(--ink);
+}
+[data-theme="light"] .boot {
+  --chrome: linear-gradient(180deg, #fff 0%, #eceef3 36%, #8b909a 50%, #f6f7fa 62%, #b6bac4 100%);
+}
+
+/* Atmosphere */
+[data-theme="light"] .bg-glow {
+  background:
+    radial-gradient(900px 600px at 78% 18%, rgba(227, 17, 47, .09), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(227, 17, 47, .05), transparent 60%),
+    var(--bg);
+}
+
+/* System bar */
+[data-theme="light"] .site-header, [data-theme="light"] .site-header.scrolled {
+  background: linear-gradient(180deg, #fff, rgba(255, 255, 255, .6)), rgba(236, 238, 242, .96);
+  border-bottom-color: rgba(18, 20, 28, .1); box-shadow: inset 0 -1px 0 #fff, 0 12px 30px -22px rgba(30, 34, 48, .4);
+}
+[data-theme="light"] .logo-wordmark { filter: brightness(0) saturate(100%); opacity: .9; }
+[data-theme="light"] .nav-links { background: rgba(18, 20, 28, .05); border-color: rgba(18, 20, 28, .08); box-shadow: inset 0 2px 6px rgba(18, 20, 28, .12); }
+[data-theme="light"] .nav-links a:hover { background: rgba(18, 20, 28, .06); }
+[data-theme="light"] .prompts kbd { color: var(--ink); background: linear-gradient(180deg, #fff, #dfe2e8); border-color: rgba(18, 20, 28, .16); box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(18, 20, 28, .25); }
+
+/* Hero: fade the dark render into the light page */
+[data-theme="light"] .hero-shade {
+  background:
+    linear-gradient(90deg, var(--bg) 0%, rgba(236, 238, 242, .94) 24%, rgba(236, 238, 242, .55) 42%, transparent 62%),
+    linear-gradient(180deg, rgba(236, 238, 242, .9) 0%, transparent 18%, transparent 72%, var(--bg) 100%);
+}
+@media (max-width: 920px) {
+  [data-theme="light"] .hero-shade { background: linear-gradient(180deg, rgba(236, 238, 242, .6) 0%, rgba(236, 238, 242, .5) 30%, rgba(236, 238, 242, .94) 62%, var(--bg) 80%); }
+}
+
+/* Showcase, panels, overlays */
+[data-theme="light"] .flow-stage::after { background: radial-gradient(ellipse at center, rgba(227, 17, 47, .2), transparent 70%); }
+[data-theme="light"] .flow-dots button { background: rgba(18, 20, 28, .15); }
+[data-theme="light"] .flow-dots button.on { background: var(--red); }
+[data-theme="light"] .flow-card::before { background: var(--bg); }
+[data-theme="light"] .nodes .wires path { stroke: rgba(18, 20, 28, .2); }
+[data-theme="light"] .nodes .wires .flow { stroke: var(--red); }
+[data-theme="light"] .nodes .wires circle { stroke: rgba(18, 20, 28, .1); }
+[data-theme="light"] .node.hub { background: linear-gradient(180deg, #fff, #f6dadd); }
+[data-theme="light"] .avatar { background: radial-gradient(circle at 50% 40%, rgba(227, 17, 47, .22), transparent 60%), linear-gradient(160deg, #f4f5f8, #d9dce3); color: var(--ink); }
+[data-theme="light"] .modal-backdrop, [data-theme="light"] .demo-backdrop { background: rgba(30, 32, 40, .5); }
+[data-theme="light"] .specs > div { background: rgba(255, 255, 255, .6); }
+[data-theme="light"] .footer-big { opacity: .1; }
+[data-theme="light"] .channel-switch { background: var(--bg); }
+[data-theme="light"] .channel-switch::after { background: var(--ink); box-shadow: none; }
+
+/* Quest */
+[data-theme="light"] .q-bar { background: rgba(18, 20, 28, .1); }
+[data-theme="light"] .q-runes b, [data-theme="light"] .qp-runes b { color: rgba(18, 20, 28, .2); }
+[data-theme="light"] .q-runes b.on, [data-theme="light"] .qp-runes b.on { color: var(--red); }
+[data-theme="light"] .xp-float { color: var(--red); text-shadow: 0 0 11px rgba(227, 17, 47, .3), 0 2px 0 #fff; }
+
+/* Smooth cross-fade while switching */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease, fill .4s ease, stroke .4s ease !important;
+}
