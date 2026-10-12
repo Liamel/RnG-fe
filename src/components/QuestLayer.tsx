@@ -109,7 +109,7 @@ export default function QuestLayer() {
         </button>
         <div className="quest-panel" role="dialog" aria-label="Skald Quest">
           <div className="qp-head">
-            <span className="label">Skald Quest</span>
+            <span className="label">Memory card · Slot 1</span>
             <h4 className="qp-rank">Rank {r + 1} · {cur.name}</h4>
             <p className="qp-next">{next ? `${next.xp - S.xp} XP to ${next.name}` : 'Highest rank reached. You are a true Skald.'}</p>
             <div className="q-bar big"><i style={{ width: pct + '%' }} /></div>
@@ -130,7 +130,7 @@ export default function QuestLayer() {
               )
             })}
           </ul>
-          <div className="qp-foot"><span className="idx">Progress saved in this browser</span><button className="qp-reset idx" onClick={reset}>Reset</button></div>
+          <div className="qp-foot"><span className="idx">Saved to memory card (this browser)</span><button className="qp-reset idx" onClick={reset}>Reset</button></div>
         </div>
       </div>
 

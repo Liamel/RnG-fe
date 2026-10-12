@@ -11,6 +11,7 @@ export function GameOverlays({ children }: { children: ReactNode }) {
   const [modalOpen, setModalOpen] = useState(false)
   const [demoId, setDemoId] = useState<string | null>(null)
   const [demoOpen, setDemoOpen] = useState(false)
+  const [demoLoaded, setDemoLoaded] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
 
@@ -24,6 +25,7 @@ export function GameOverlays({ children }: { children: ReactNode }) {
     if (!findGame(id)?.demo) return
     setModalOpen(false)
     setDemoId(id)
+    setDemoLoaded(false)
     setDemoOpen(true)
     unlock('demo')
   }, [])
@@ -89,7 +91,10 @@ export function GameOverlays({ children }: { children: ReactNode }) {
               <button className="demo-close" aria-label="Close demo" onClick={() => setDemoOpen(false)}>✕</button>
             </div>
             <div className="demo-frame">
-              {demoOpen && <iframe src={d.demo} title={`${d.title} demo`} allow="autoplay; fullscreen" allowFullScreen />}
+              {demoOpen && <iframe src={d.demo} title={`${d.title} demo`} allow="autoplay; fullscreen" allowFullScreen onLoad={() => setDemoLoaded(true)} />}
+              {demoOpen && !demoLoaded && (
+                <div className="now-loading" aria-live="polite"><span className="nl-rune rune" aria-hidden="true">ᛊ</span><span>Now loading</span></div>
+              )}
             </div>
           </div>
         </div>

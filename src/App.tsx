@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import { GameOverlays } from './components/GameOverlays'
 import Header from './components/Header'
 import QuestLayer from './components/QuestLayer'
+import { BootScreen, ChannelSwitch, PromptBar } from './components/ConsoleOS'
 import { CrtOverlay } from './components/Signal'
 import { visit, type PageKey } from './lib/quest'
 import { useGlitch } from './lib/useGlitch'
@@ -54,6 +55,9 @@ function App() {
       </main>
       <Footer />
       <QuestLayer />
+      <PromptBar />
+      <ChannelSwitch />
+      <BootScreen />
       <CrtOverlay />
     </GameOverlays>
   )
