@@ -96,13 +96,13 @@ export default function Coverflow() {
           const ad = Math.abs(d), s = Math.sign(d)
           const x = d === 0 ? 0 : s * ((mobile ? 60 : 72) + (ad - 1) * (mobile ? 26 : 46))
           const hidden = ad > (mobile ? 1 : 2)
-          const style: CSSProperties = {
+          const style = {
             transform: `translateX(${x}%) translateZ(${-ad * 170}px) rotateY(${-s * Math.min(ad, 1) * 42}deg) scale(${d === 0 ? 1.06 : 1})`,
             zIndex: 100 - ad,
             opacity: hidden ? 0 : 1 - ad * .18,
-            filter: d === 0 ? 'none' : `brightness(${1 - ad * .2}) saturate(${1 - ad * .15})`,
+            '--shade': d === 0 ? 0 : Math.min(ad * .22, .6),
             pointerEvents: hidden ? 'none' : undefined,
-          }
+          } as CSSProperties
           return (
             <div
               key={game.id}

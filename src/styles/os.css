@@ -217,3 +217,56 @@ h1 *, h2 * { text-shadow: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .channel-switch, .boot { display: none; }
 }
+
+/* =========================================================
+   PERFORMANCE — keep everything that moves compositor-only
+   (transform / opacity), so idle pages and scrolling never
+   repaint. Same look, a fraction of the work.
+   ========================================================= */
+/* Ambient layers that repainted the whole screen every frame (dust) or blurred huge areas (orbs) */
+.dust, .orbs, .bg-grid { display: none; }
+/* No live backdrop blurs: every panel here is opaque already */
+/* (two rules: the minifier would merge both into only the -webkit- form, which Chrome ignores) */
+*, *::before, *::after { backdrop-filter: none !important; }
+html *, html *::before, html *::after { -webkit-backdrop-filter: none !important; }
+.modal-backdrop, .demo-backdrop { background: rgba(3, 3, 5, .9); }
+.cta-box .orbit::after { filter: none; }
+/* Film grain: a far smaller layer, still moved by transform only */
+.noise { inset: -8%; }
+
+/* Headlines: static aberration with no blur radius; no animated filter on reveal */
+h1, h2, .footer-big { filter: drop-shadow(1.4px 0 rgba(255, 40, 40, .6)) drop-shadow(-1.4px 0 rgba(70, 190, 255, .55)); }
+.hero h1, h2.reveal.in, .reveal.in h2, .page-hero h1 { animation: none; }
+
+/* Selection: a steady glow instead of an infinite box-shadow pulse */
+.cell:hover, .game-card:hover, .game-card:focus-visible, .member:hover, .tl:hover, .logos > div:hover, .flow-card.on, .side-item:hover {
+  animation: none; box-shadow: var(--glass-edge), 0 0 0 1px rgba(255, 42, 61, .85), 0 0 26px -6px rgba(255, 42, 61, .6);
+}
+
+/* Carousel: no mirror reflections; side cards dim via an overlay's opacity (set as --shade), not image filters */
+.flow-card { -webkit-box-reflect: initial; /* Chrome rejects "none" here */ will-change: transform; transition: transform .8s var(--ease), opacity .8s var(--ease), border-color .4s, box-shadow .4s; }
+.flow-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 4; border-radius: inherit; pointer-events: none;
+  background: #000; opacity: var(--shade, 0); transition: opacity .8s var(--ease);
+}
+/* Game art: the spinning conic layer only exists for generated art, not behind real images */
+.art:has(img)::before { display: none; }
+
+/* Wire flow + hidden runes: stepped / opacity animations instead of per-frame repaints */
+.nodes .wires .flow { animation-timing-function: steps(6); }
+.hidden-rune { color: rgba(255, 45, 70, .8); text-shadow: 0 0 14px rgba(255, 45, 70, .7); animation: rune-blink 3.2s ease-in-out infinite; }
+@keyframes rune-blink { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+
+/* Progress bar scales instead of resizing (no layout on scroll) */
+.progress { width: 100%; transform: scaleX(0); transform-origin: 0 50%; }
+
+/* Boot: the power-off flash is an opacity overlay, and the logo intro animates opacity / transform only */
+.boot-mark { animation-name: boot-in !important; filter: drop-shadow(2px 0 rgba(255, 40, 40, .45)) drop-shadow(-2px 0 rgba(70, 190, 255, .35)) drop-shadow(0 0 28px rgba(255, 36, 36, .5)); }
+.boot::after { content: ""; position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.boot.exit::after { animation: boot-flash .6s ease-out forwards; }
+@keyframes boot-flash { 35%, 100% { opacity: 1; } }
+@keyframes power-off {
+  0% { transform: none; }
+  45% { transform: scaleY(.006); }
+  100% { transform: scaleY(.003) scaleX(0); opacity: 0; }
+}

@@ -6,13 +6,13 @@ import { useGameOverlays } from '../lib/overlays'
 export function GameArt({ game: g, name = true }: { game: Game; name?: boolean }) {
   return (
     <div className="art" style={{ '--c1': g.c1, '--c2': g.c2, '--c3': g.c3 } as CSSProperties}>
-      {g.img ? <img src={g.img} alt={g.title} /> : <><span className="glyph">{g.glyph}</span>{name && <span className="name">{g.title}</span>}</>}
+      {g.img ? <img src={g.img} alt={g.title} loading="lazy" decoding="async" /> : <><span className="glyph">{g.glyph}</span>{name && <span className="name">{g.title}</span>}</>}
     </div>
   )
 }
 
 export function GameTitle({ game: g }: { game: Game }) {
-  return g.logo ? <img className="game-logo" src={g.logo} alt={g.title} /> : <>{g.title}<span className="dot">.</span></>
+  return g.logo ? <img className="game-logo" src={g.logo} alt={g.title} decoding="async" /> : <>{g.title}<span className="dot">.</span></>
 }
 
 export function Vol({ n }: { n: number }) {

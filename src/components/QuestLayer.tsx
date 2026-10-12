@@ -84,13 +84,14 @@ export default function QuestLayer() {
 
   // deep diver: scroll to the very bottom of a page
   useEffect(() => {
-    let done = false
-    const onScroll = () => {
-      if (done) return
+    let done = false, raf = 0
+    const check = () => {
+      raf = 0
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 40) { done = true; unlock('deep') }
     }
+    const onScroll = () => { if (!done && !raf) raf = requestAnimationFrame(check) }
     addEventListener('scroll', onScroll, { passive: true })
-    return () => removeEventListener('scroll', onScroll)
+    return () => { removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [pathname])
 
   // ---------- HUD ----------

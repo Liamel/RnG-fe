@@ -34,8 +34,13 @@ export function GameOverlays({ children }: { children: ReactNode }) {
   // a link inside the modal navigates away: close everything
   useEffect(() => { setModalOpen(false); setDemoOpen(false) }, [pathname])
 
+  // only touch the scroll lock when an overlay opens or closes (the boot screen holds it on first load)
+  const locked = useRef(false)
   useEffect(() => {
-    document.body.style.overflow = modalOpen || demoOpen ? 'hidden' : ''
+    const lock = modalOpen || demoOpen
+    if (lock === locked.current) return
+    locked.current = lock
+    document.body.style.overflow = lock ? 'hidden' : ''
   }, [modalOpen, demoOpen])
   useEffect(() => { if (modalOpen) closeRef.current?.focus() }, [modalOpen, modalId])
   useEffect(() => {

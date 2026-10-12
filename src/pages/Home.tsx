@@ -18,15 +18,25 @@ function Hero() {
   useEffect(() => {
     const el = hero.current!
     if (!matchMedia('(pointer: fine)').matches) return
+    // the rect is measured once per hover (not per move) and the stage moves at most once per frame
+    let rect: DOMRect | null = null, raf = 0, px = 0, py = 0
+    const apply = () => { raf = 0; stage.current!.style.translate = `${-px * 24}px ${-py * 16}px` }
+    const onEnter = () => { rect = el.getBoundingClientRect() }
     const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect()
-      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5
-      stage.current!.style.translate = `${-x * 24}px ${-y * 16}px`
+      rect ??= el.getBoundingClientRect()
+      px = (e.clientX - rect.left) / rect.width - .5; py = (e.clientY - rect.top) / rect.height - .5
+      if (!raf) raf = requestAnimationFrame(apply)
     }
-    const onLeave = () => (stage.current!.style.translate = '')
+    const onLeave = () => { rect = null; cancelAnimationFrame(raf); raf = 0; stage.current!.style.translate = '' }
+    const onScroll = () => { rect = null }
+    el.addEventListener('pointerenter', onEnter)
     el.addEventListener('pointermove', onMove)
     el.addEventListener('pointerleave', onLeave)
-    return () => { el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerleave', onLeave) }
+    addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      el.removeEventListener('pointerenter', onEnter); el.removeEventListener('pointermove', onMove); el.removeEventListener('pointerleave', onLeave)
+      removeEventListener('scroll', onScroll); cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (
