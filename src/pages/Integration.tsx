@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router'
 import CtaBox from '../components/CtaBox'
 import HiddenRune from '../components/HiddenRune'
+import { Glitch, Runes } from '../components/Signal'
 
 // Pre-highlighted snippets (kept as HTML so the whitespace inside <pre> is exact)
 const SNIPPETS = {
@@ -60,7 +61,8 @@ export default function Integration() {
         <div className="wrap row">
           <div>
             <span className="idx">S / 004 · Integration</span>
-            <h1>One API.<br /><span className="r">Every world.</span></h1>
+            <h1><Glitch>One API.</Glitch><br /><span className="r">Every world.</span></h1>
+            <Runes text="One API every world" className="runes-line" />
           </div>
           <div>
             <p className="lead">Connect once to our remote game server and unlock the full Skald catalogue, from sandbox to live in as little as 14 days.</p>

@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { useSearchParams } from 'react-router'
 import CtaBox from '../components/CtaBox'
 import HiddenRune from '../components/HiddenRune'
+import { Glitch, Runes } from '../components/Signal'
 import { findGame } from '../data/games'
 import { unlock } from '../lib/quest'
 
@@ -39,7 +40,8 @@ export default function Contact() {
         <div className="wrap row">
           <div>
             <span className="idx">S / 005 · Contact</span>
-            <h1>Let's build<br /><span className="r">what's next.</span></h1>
+            <h1><Glitch>{"Let's build"}</Glitch><br /><span className="r">what's next.</span></h1>
+            <Runes text="Lets build whats next" className="runes-line" />
           </div>
           <p className="lead">Demos, partnerships, integration or careers: tell us what you need and we'll reply within one business day.</p>
         </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { NAV_LINKS } from '../data/nav'
 import { Logo } from './Logo'
+import { Runes } from './Signal'
 
 export default function Footer() {
   return (
@@ -19,6 +20,7 @@ export default function Footer() {
         <div className="footer-big" aria-hidden="true">SKALD</div>
         <div className="footer-bottom">
           <span><span className="age">18+</span>Play responsibly · B2B distribution only</span>
+          <Runes text="Skald Gaming" />
           <span>© {new Date().getFullYear()} Skald Gaming</span>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Coverflow from '../components/Coverflow'
 import CtaBox from '../components/CtaBox'
 import HiddenRune from '../components/HiddenRune'
 import { Mark } from '../components/Logo'
+import { Glitch, Runes, Ticker } from '../components/Signal'
 import SlotMachine from '../components/SlotMachine'
 import { burst, unlock } from '../lib/quest'
 
@@ -54,10 +55,11 @@ function Hero() {
           <span className="idx">S / 001 · Independent iGaming studio</span>
           <span className="label">Games with a signature</span>
           <h1>
-            <span className="ln"><span>Born</span></span>
-            <span className="ln"><span>to stand</span></span>
-            <span className="ln"><span className="r">apart.</span></span>
+            <span className="ln"><span><Glitch>Born</Glitch></span></span>
+            <span className="ln"><span><Glitch>to stand</Glitch></span></span>
+            <span className="ln"><span className="r"><Glitch>apart.</Glitch></span></span>
           </h1>
+          <Runes text="Born to stand apart" className="runes-line" />
           <p className="lead">Original casino worlds with real character. Every symbol, sound and feature carries the Skald mark.</p>
           <div className="hero-cta">
             <Link className="btn btn-red" to="/games">Explore our games <span className="ar">↗</span></Link>
@@ -93,11 +95,7 @@ export default function Home() {
 
       {/* STRIP */}
       <div className="strip">
-        <div className="wrap">
-          <div className="strip-item"><b>01</b> Original worlds</div>
-          <div className="strip-item"><b>02</b> Signature characters</div>
-          <div className="strip-item"><b>03</b> Proven maths</div>
-        </div>
+        <Ticker items={['Original worlds', 'Signature characters', 'Proven maths', 'Seamless wallet API', '25+ regulated markets', 'Mobile first', 'Free rounds & tournaments']} />
         <HiddenRune page="home" style={{ right: '2%', top: '50%', transform: 'translateY(-50%)' }} />
       </div>
 
@@ -108,6 +106,7 @@ export default function Home() {
             <div>
               <span className="label reveal">Studio games</span>
               <h2 className="reveal d1">Made to<br /><span className="r">hold attention.</span></h2>
+              <Runes text="The sagas" className="sec-rune reveal d2" />
             </div>
             <Link className="link reveal d2" to="/games">All games <span className="ar">↗</span></Link>
           </div>

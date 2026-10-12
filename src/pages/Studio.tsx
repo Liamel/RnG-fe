@@ -1,5 +1,6 @@
 import CtaBox from '../components/CtaBox'
 import HiddenRune from '../components/HiddenRune'
+import { Glitch, Runes } from '../components/Signal'
 
 export default function Studio() {
   return (
@@ -8,7 +9,8 @@ export default function Studio() {
         <div className="wrap row">
           <div>
             <span className="idx">S / 003 · The studio</span>
-            <h1>We are<br /><span className="r">Skald.</span></h1>
+            <h1><Glitch>We are</Glitch><br /><span className="r">Skald.</span></h1>
+            <Runes text="We are Skald" className="runes-line" />
           </div>
           <p className="lead">A skald was the storyteller who made legends last. We're a crew of artists, mathematicians and engineers doing the same for casino games.</p>
         </div>

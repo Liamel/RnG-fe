@@ -5,7 +5,9 @@ import Footer from './components/Footer'
 import { GameOverlays } from './components/GameOverlays'
 import Header from './components/Header'
 import QuestLayer from './components/QuestLayer'
+import { CrtOverlay } from './components/Signal'
 import { visit, type PageKey } from './lib/quest'
+import { useGlitch } from './lib/useGlitch'
 import { useReveal } from './lib/useReveal'
 import Contact from './pages/Contact'
 import Games from './pages/Games'
@@ -34,6 +36,7 @@ function App() {
   // a passive effect, so <QuestLayer> is already listening for the achievement toasts
   useEffect(() => { if (page) visit(page.key) }, [page])
   useReveal(pathname)
+  useGlitch(pathname)
 
   return (
     <GameOverlays>
@@ -51,6 +54,7 @@ function App() {
       </main>
       <Footer />
       <QuestLayer />
+      <CrtOverlay />
     </GameOverlays>
   )
 }

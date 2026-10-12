@@ -1,0 +1,84 @@
+/* =========================================================
+   CRT SIGNAL LAYER — the 2000s console vibe from the Skald
+   console site, layered over the industrial / glass system:
+   scanlines, grain, chromatic aberration, glitch slices,
+   runic captions and a scrolling ticker.
+   ========================================================= */
+:root {
+  /* resting chromatic aberration + bloom */
+  --ca: 1.4px 0 rgba(255, 40, 40, .55), -1.4px 0 rgba(70, 190, 255, .5), 0 0 22px rgba(255, 255, 255, .18);
+  --ca-hit: 14px 0 rgba(255, 40, 40, .9), -14px 0 rgba(70, 190, 255, .9), 0 0 40px rgba(255, 255, 255, .6);
+  --rune: "Noto Sans Runic", "Segoe UI Historic", serif;
+  --scan: .22;
+}
+
+/* ---------- CRT overlay: scanlines, vignette, grain ---------- */
+.crt { pointer-events: none; position: fixed; inset: 0; z-index: 90; }
+.crt::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, var(--scan)) 2px 3px);
+}
+.crt::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .5) 100%); }
+.noise {
+  pointer-events: none; position: fixed; inset: -50%; z-index: 89; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain .5s steps(4) infinite;
+}
+@keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-3%, 2%); } 50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -1%); } 100% { transform: translate(3%, 1%); } }
+
+/* ---------- Chromatic aberration on display type ---------- */
+h1, h2, .flow-num, .cell .big, .footer-big { text-shadow: var(--ca); }
+/* solid brand red instead of gradient text, so the aberration reads cleanly */
+h1 .r, h2 .r { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--red); }
+.hero h1 { animation: hit 1.6s .2s cubic-bezier(.1, .8, .2, 1) both; }
+h2.reveal.in, .reveal.in h2, .page-hero h1 { animation: hit 1.2s cubic-bezier(.1, .8, .2, 1) both; }
+@keyframes hit {
+  0% { text-shadow: var(--ca-hit); }
+  100% { text-shadow: var(--ca); }
+}
+
+/* ---------- Glitch slices (useGlitch toggles .glitching) ---------- */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; text-shadow: none; white-space: nowrap; }
+.glitching::before { opacity: .85; color: #ff3030; transform: translateX(-5px); clip-path: inset(22% 0 66% 0); }
+.glitching::after { opacity: .85; color: #7ebae4; transform: translateX(6px); clip-path: inset(70% 0 18% 0); }
+
+/* ---------- Runes ---------- */
+.rune { font-family: var(--rune); font-weight: 400; letter-spacing: .12em; }
+.runes-line { display: block; margin: -12px 0 26px; font-size: clamp(16px, 1.8vw, 26px); line-height: 1.2; color: var(--ink); text-shadow: var(--ca); }
+.page-hero .runes-line { margin: 18px 0 0; font-size: clamp(14px, 1.4vw, 20px); color: var(--muted); text-shadow: none; }
+.sec-rune { display: block; margin-top: 14px; font-size: clamp(13px, 1.3vw, 18px); color: var(--dim); }
+.hidden-rune, .q-runes b, .qp-runes b, .toast .tg, .qp-list .g { font-family: var(--rune); }
+
+/* blinking block cursor after the hero index line */
+.hero-grid > div > .idx:first-child::after, .page-hero .row > div > .idx:first-child::after {
+  content: ""; display: inline-block; width: .6em; height: 1.1em; margin-left: 8px; vertical-align: -2px;
+  background: var(--red); animation: cursor 1s steps(1) infinite;
+}
+@keyframes cursor { 50% { opacity: 0; } }
+
+/* ---------- Ticker (replaces the three-item strip) ---------- */
+.strip { overflow: hidden; }
+.ticker { overflow: hidden; padding: 18px 0; }
+.ticker .track { display: flex; width: max-content; animation: ticker 40s linear infinite; }
+.ticker ul {
+  display: flex; align-items: center; gap: 28px; margin: 0; padding: 0 14px; list-style: none; white-space: nowrap;
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+}
+.ticker li.r { font: 400 16px/1 var(--rune); letter-spacing: 0; color: var(--red); text-shadow: 0 0 10px var(--red); }
+.strip:hover .ticker .track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ---------- Footer ---------- */
+.footer-bottom .rune { text-transform: none; letter-spacing: .12em; }
+
+/* ---------- Light theme: a gentler signal ---------- */
+[data-theme="light"] { --scan: .07; --ca: 1px 0 rgba(255, 40, 40, .35), -1px 0 rgba(70, 150, 255, .3); }
+[data-theme="light"] .crt::after { background: radial-gradient(ellipse at center, transparent 65%, rgba(0, 0, 0, .14) 100%); }
+[data-theme="light"] .noise { opacity: .035; }
+[data-theme="light"] .runes-line { text-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .noise { animation: none; }
+  .ticker .track { animation: none; }
+}

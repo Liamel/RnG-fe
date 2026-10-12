@@ -3,6 +3,7 @@ import { useLocation } from 'react-router'
 import CtaBox from '../components/CtaBox'
 import { GameCard } from '../components/GameArt'
 import HiddenRune from '../components/HiddenRune'
+import { Glitch, Runes } from '../components/Signal'
 import { GAMES, type GameType } from '../data/games'
 
 const FILTERS: [GameType | 'all', string][] = [['all', 'All'], ['slots', 'Video Slots'], ['holdwin', 'Hold & Win'], ['crash', 'Crash'], ['table', 'Table']]
@@ -30,7 +31,8 @@ export default function Games() {
         <div className="wrap row">
           <div>
             <span className="idx">S / 002 · Games portfolio</span>
-            <h1>Every world.<br /><span className="r">One signature.</span></h1>
+            <h1><Glitch>Every world.</Glitch><br /><span className="r">One signature.</span></h1>
+            <Runes text="Every world one signature" className="runes-line" />
           </div>
           <p className="lead">Filter by format, open any title for its maths and specs, and request a demo in one click.</p>
         </div>
