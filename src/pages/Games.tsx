@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import CtaBox from '../components/CtaBox'
 import { GameCard } from '../components/GameArt'
 import HiddenRune from '../components/HiddenRune'
-import { Glitch, Runes } from '../components/Signal'
 import { GAMES, type GameType } from '../data/games'
+
+// three.js is only loaded on this page
+const GameStrip = lazy(() => import('../components/GameStrip'))
 
 const FILTERS: [GameType | 'all', string][] = [['all', 'All'], ['slots', 'Video Slots'], ['holdwin', 'Hold & Win'], ['crash', 'Crash'], ['table', 'Table']]
 // hide format filters that currently have no games
@@ -27,19 +29,14 @@ export default function Games() {
 
   return (
     <>
-      <section className="page-hero">
-        <div className="wrap row">
-          <div>
-            <span className="idx">S / 002 · Games portfolio</span>
-            <h1><Glitch>Every world.</Glitch><br /><span className="r">One signature.</span></h1>
-            <Runes text="Every world one signature" className="runes-line" />
-          </div>
-          <p className="lead">Filter by format, open any title for its maths and specs, and request a demo in one click.</p>
-        </div>
-        <HiddenRune page="games" style={{ right: '4%', bottom: 18 }} />
-      </section>
+      <h1 className="sr-only">Games portfolio</h1>
+
+      <Suspense fallback={<section className="game-strip"><div className="game-strip-stage" /></section>}>
+        <GameStrip />
+      </Suspense>
 
       <section style={{ paddingTop: 48 }}>
+        <HiddenRune page="games" style={{ right: '4%', top: 18 }} />
         <div className="wrap">
           <div className="toolbar">
             <div className="filters" role="tablist" aria-label="Filter games">
